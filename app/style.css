@@ -1,0 +1,68 @@
+/* Vice Cover Studio — dark neon editor. All system fonts, no downloads. */
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: #14081f; color: #f5eefb; font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.app { display: flex; gap: 28px; align-items: flex-start; justify-content: center; padding: 24px; max-width: 1440px; margin: 0 auto; }
+.controls { display: flex; flex-direction: column; gap: 16px; width: 340px; flex: none; }
+.controls h1 {
+  margin: 0; font-size: 30px; line-height: 1.05; letter-spacing: 0.02em;
+  font-weight: 900; font-family: "Arial Black", "Helvetica Neue", sans-serif;
+  background: linear-gradient(90deg, #ffe259, #ff7e3d 45%, #ff2e88);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 0 24px rgba(255, 46, 136, 0.35);
+}
+.tagline { margin: 0; color: #c9a8dd; }
+.hint { margin: 6px 0 0; color: #a98fc0; font-size: 13px; }
+.fineprint { margin: 0; color: #8a6da3; font-size: 12px; }
+fieldset { border: 1px solid #4b2a63; border-radius: 10px; padding: 12px; margin: 0; background: rgba(255, 255, 255, 0.03); }
+legend { font-weight: 800; color: #ffd76a; padding: 0 6px; }
+label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; margin-top: 8px; }
+label:first-child { margin-top: 0; }
+input[type=text], select {
+  font: inherit; padding: 9px 10px; border: 1px solid #6b4387; border-radius: 7px;
+  background: #22103a; color: #fff;
+}
+input[type=file] { font: inherit; color: #d9c2ec; }
+input[type=range] { accent-color: #ff2e88; }
+.slot { display: flex; flex-direction: column; gap: 4px; padding: 8px 0; border-bottom: 1px dashed #4b2a63; }
+.slot:last-of-type { border-bottom: 0; }
+.slot-label { color: #c9a8dd; font-size: 13px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.row:first-child { margin-top: 0; }
+button {
+  font: inherit; font-weight: 700; padding: 9px 12px; border: 1px solid #6b4387; border-radius: 7px;
+  background: #2a1345; color: #f5eefb; cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: #ff5da2; }
+button:disabled { opacity: 0.4; cursor: default; }
+button.active { background: #ff2e88; border-color: #ff2e88; color: #fff; }
+button.primary {
+  width: 100%; padding: 12px; margin-top: 10px; font-size: 16px;
+  background: linear-gradient(90deg, #ff7e3d, #ff2e88); border: 0; color: #fff;
+}
+.panel-chip { padding: 6px 9px; font-size: 13px; }
+.panel-chip.empty { opacity: 0.55; border-style: dashed; }
+.panel-chip.selected { background: #ffd76a; border-color: #ffd76a; color: #1d0a2e; }
+#status { margin: 8px 0 0; color: #8affc1; min-height: 1.2em; }
+.preview { flex: 1; min-width: 0; text-align: center; position: sticky; top: 24px; }
+.preview canvas {
+  max-width: 100%; max-height: 78vh; width: auto; height: auto;
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.14);
+  cursor: crosshair; background: #241533;
+}
+.preview .hint { margin-top: 10px; }
+#test-output { display: none; }
+
+/* Shot mode: the cover alone, filling the viewport. */
+body.shot-cover { background: #000; }
+body.shot-cover .controls, body.shot-cover .preview .hint { display: none; }
+body.shot-cover .app { padding: 0; max-width: none; }
+body.shot-cover .preview { position: static; }
+body.shot-cover canvas {
+  width: 100vw; height: 100vh; max-height: none; object-fit: contain;
+  box-shadow: none; cursor: default;
+}
+@media (max-width: 900px) {
+  .app { flex-direction: column; }
+  .controls { width: 100%; }
+  .preview { position: static; width: 100%; }
+}

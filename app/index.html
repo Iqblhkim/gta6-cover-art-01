@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA 6-style cover art maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls" aria-label="Cover controls">
+    <h1>VICE COVER STUDIO</h1>
+    <p class="tagline">Your photo + a caption = a GTA 6-style multi-panel cover. Photos stay on your machine — nothing is uploaded.</p>
+
+    <fieldset>
+      <legend>1 · Photos</legend>
+      <p class="hint">Load up to 3 photos. The first one fills every empty panel.</p>
+      <div class="slot">
+        <label>Photo 1 <input id="photo-0" type="file" accept="image/*"></label>
+        <span id="slot-label-0" class="slot-label">Photo 1: empty</span>
+        <button id="fill-0" type="button" disabled>Fill all panels</button>
+      </div>
+      <div class="slot">
+        <label>Photo 2 <input id="photo-1" type="file" accept="image/*"></label>
+        <span id="slot-label-1" class="slot-label">Photo 2: empty</span>
+        <button id="fill-1" type="button" disabled>Fill all panels</button>
+      </div>
+      <div class="slot">
+        <label>Photo 3 <input id="photo-2" type="file" accept="image/*"></label>
+        <span id="slot-label-2" class="slot-label">Photo 3: empty</span>
+        <button id="fill-2" type="button" disabled>Fill all panels</button>
+      </div>
+      <div class="row">
+        <button id="sample-boulevard" type="button">Sample: Boulevard</button>
+        <button id="sample-pier" type="button">Sample: Pier</button>
+        <button id="sample-both" type="button">Sample: Both</button>
+      </div>
+      <p class="hint">Tip: drag a photo straight onto the preview to load it.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Caption</legend>
+      <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
+      <label>Subtitle <input id="subtitle" type="text" maxlength="30" value="Vice City"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Look</legend>
+      <div class="row" role="group" aria-label="Layout">
+        <button type="button" data-layout="poster" class="active">Poster · 5 panels</button>
+        <button type="button" data-layout="quad">Quad · 4 panels</button>
+      </div>
+      <div class="row" role="group" aria-label="Colour grade">
+        <button type="button" data-grade="sunset" class="active">Sunset</button>
+        <button type="button" data-grade="neon">Neon</button>
+        <button type="button" data-grade="noir">Noir</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Panel — click a panel in the preview</legend>
+      <div id="panel-chips" class="row">
+        <button type="button" class="panel-chip selected">Panel 1</button>
+        <button type="button" class="panel-chip">Panel 2</button>
+        <button type="button" class="panel-chip">Panel 3</button>
+        <button type="button" class="panel-chip">Panel 4</button>
+        <button type="button" class="panel-chip">Panel 5</button>
+      </div>
+      <p id="panel-label" class="hint">Panel 1 of 5</p>
+      <label>Photo in this panel
+        <select id="panel-photo">
+          <option value="-1">Empty</option>
+          <option value="0">Photo 1</option>
+          <option value="1">Photo 2</option>
+          <option value="2">Photo 3</option>
+        </select>
+      </label>
+      <label>Or load a photo into this panel <input id="panel-photo-file" type="file" accept="image/*"></label>
+      <label>Zoom <input id="panel-zoom" type="range" min="1" max="3" step="0.05" value="1"></label>
+      <label>Position left–right <input id="panel-x" type="range" min="0" max="1" step="0.01" value="0.5"></label>
+      <label>Position up–down <input id="panel-y" type="range" min="0" max="1" step="0.01" value="0.5"></label>
+      <button id="panel-reset" type="button">Reset crop for this panel</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>5 · Export</legend>
+      <div class="row" role="group" aria-label="Post size">
+        <button type="button" data-size="1080x1080">1080 × 1080</button>
+        <button type="button" data-size="1080x1350">1080 × 1350</button>
+        <button type="button" data-size="1920x1080" class="active">1920 × 1080</button>
+      </div>
+      <button id="export" type="button" class="primary">Export PNG</button>
+      <button id="export-all" type="button">Export all 3 sizes</button>
+      <p id="status" role="status"></p>
+      <pre id="test-output" hidden></pre>
+    </fieldset>
+
+    <p class="fineprint">Original art made in your browser. No Rockstar logo, artwork or font — the lettering is a system bold with outline, gradient and glow.</p>
+  </section>
+  <section class="preview" aria-label="Live cover preview">
+    <canvas id="cover" width="760" height="428" aria-label="The cover, live preview"></canvas>
+    <p class="hint">Live preview — click any panel to crop it.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
